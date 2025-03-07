@@ -1,5 +1,5 @@
 import { usePathname } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { createContext, Suspense, useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import ErrorFallback from "@/components/molecules/error-fallback/ErrorFallback";
@@ -16,6 +16,8 @@ import SidebarHeader from "./components/SidebarHeader";
 const TABLET_BREAKPOINT = 964;
 const TO_HIDE_PATH = ["/", "/login", "/signup"];
 
+export const SidebarContext = createContext<() => void>(() => {});
+
 export default function Sidebar() {
   const pathname = usePathname();
   const isHidden = TO_HIDE_PATH.includes(pathname);
@@ -25,6 +27,12 @@ export default function Sidebar() {
 
   const handleToggleSidebar = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleCloseSidebarAfterAction = () => {
+    if (window.innerWidth < TABLET_BREAKPOINT) {
+      setIsOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -53,27 +61,29 @@ export default function Sidebar() {
             !isOpen && "hidden sm:flex sm:w-[60px] sm:flex-[0_0_60px]",
           )}
         >
-          <SidebarHeader
-            isOpen={isOpen}
-            onToggleSidebar={handleToggleSidebar}
-          />
-          <div
-            className={cn(
-              "flex min-h-0 flex-col opacity-100 [&>*]:px-3 sm:[&>*]:px-6",
-              !isOpen ? "opacity-0" : "transition-[opacity] delay-[10ms]",
-            )}
-          >
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <Suspense>
-                <Profile />
-              </Suspense>
-            </ErrorBoundary>
-            <InputModalProvider>
-              <MenuDashboard />
-            </InputModalProvider>
-            <MenuGoal />
-          </div>
-          <Toaster className="bottom-[40px] w-auto px-4" />
+          <SidebarContext.Provider value={handleCloseSidebarAfterAction}>
+            <SidebarHeader
+              isOpen={isOpen}
+              onToggleSidebar={handleToggleSidebar}
+            />
+            <div
+              className={cn(
+                "flex min-h-0 flex-col opacity-100 [&>*]:px-3 sm:[&>*]:px-6",
+                !isOpen ? "opacity-0" : "transition-[opacity] delay-[10ms]",
+              )}
+            >
+              <ErrorBoundary FallbackComponent={ErrorFallback}>
+                <Suspense>
+                  <Profile />
+                </Suspense>
+              </ErrorBoundary>
+              <InputModalProvider>
+                <MenuDashboard />
+              </InputModalProvider>
+              <MenuGoal />
+            </div>
+            <Toaster className="bottom-[40px] w-auto px-4" />
+          </SidebarContext.Provider>
         </aside>
         <div
           className={cn(
