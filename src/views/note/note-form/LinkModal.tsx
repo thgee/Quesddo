@@ -11,6 +11,12 @@ export default function LinkModal({}) {
   const { closeModal } = useModalContext();
   const methods = useFormContext();
 
+  const { watch } = methods;
+  const tempLinkUrl = watch("tempLinkUrl");
+  const isValid = /^(http|https):\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/.test(
+    tempLinkUrl,
+  );
+
   const resetTempUrl = () => {};
 
   const handleChangeTempLinkUrl: ChangeEventHandler = (e) => {
@@ -39,13 +45,18 @@ export default function LinkModal({}) {
           <InputModal.Title>링크 업로드</InputModal.Title>
           <InputModal.CloseButton />
         </div>
-        <div className="pt-6 pb-10">
+        <div className="h-[80px] pt-6 pb-10">
           <InputModal.Label>링크</InputModal.Label>
           <InputModal.TextInput
             placeholder="링크를 입력하세요."
             defaultValue=""
             onChange={handleChangeTempLinkUrl}
           />
+          {!isValid && tempLinkUrl && (
+            <p className="mt-1 px-2 text-sm font-normal text-red-600">
+              유효하지 않은 링크 주소입니다.
+            </p>
+          )}
         </div>
         <input
           {...methods.register("linkUrl", {
@@ -53,7 +64,11 @@ export default function LinkModal({}) {
           })}
           type="hidden"
         />
-        <InputModal.SubmitButton type="button" onClick={handleSubmitLink}>
+        <InputModal.SubmitButton
+          type="button"
+          onClick={handleSubmitLink}
+          disabled={!isValid}
+        >
           확인
         </InputModal.SubmitButton>
       </InputModal.Content>
