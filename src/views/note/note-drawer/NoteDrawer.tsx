@@ -56,21 +56,13 @@ export default function NoteDrawer() {
 
   return (
     <div className="fixed inset-0 z-20 flex justify-end bg-black/50">
-      <div className="smd:grid-cols-[1fr_minmax(512px,_1fr)] grid grid-cols-1 overflow-y-auto md:max-w-none">
-        <div className="flex h-10 items-center bg-white px-6">
-          <ExitBtn onClick={handleClick} />
-        </div>
-        <section
-          id="embed-container"
-          className="smd:order-first smd:row-span-2 smd:h-screen sticky flex w-full items-center"
-        ></section>
-        <section className="smd:w-[512px] box-border flex min-h-[calc(100dvh-40px)] w-full flex-1 flex-col gap-4 overflow-hidden bg-white p-6 pt-0">
-          <BoundaryWrapper>
-            {mode === MODE.CREATE && <NoteCreationForm todoId={todoId} />}
-            {mode === MODE.EDIT && <NoteUpdateForm noteId={noteId} />}
-          </BoundaryWrapper>
-        </section>
-      </div>
+      <section className="box-border flex flex-col gap-4 bg-white p-6 sm:left-auto sm:w-[512px] sm:border-l sm:border-slate-200 md:w-[800px]">
+        <ExitBtn onClick={handleClick} />
+        <BoundaryWrapper>
+          {mode === MODE.CREATE && <NoteCreationForm todoId={todoId} />}
+          {mode === MODE.EDIT && <NoteUpdateForm noteId={noteId} />}
+        </BoundaryWrapper>
+      </section>
     </div>
   );
 }
