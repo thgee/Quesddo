@@ -1,6 +1,7 @@
 import { ChangeEventHandler } from "react";
 import { useFormContext } from "react-hook-form";
 
+import ExitBtn from "@/components/atoms/exit-btn/ExitBtn";
 import InputModal from "@/components/organisms/modal/InputModal";
 import { useModalContext } from "@/contexts/InputModalContext";
 
@@ -17,7 +18,11 @@ export default function LinkModal({}) {
     tempLinkUrl,
   );
 
-  const resetTempUrl = () => {};
+  const resetTempUrl = () => {
+    methods.setValue("tempLinkUrl", "", {
+      shouldDirty: false,
+    });
+  };
 
   const handleChangeTempLinkUrl: ChangeEventHandler = (e) => {
     methods.setValue(
@@ -29,12 +34,16 @@ export default function LinkModal({}) {
     );
   };
 
+  const handleCloseModal = () => {
+    resetTempUrl();
+    closeModal();
+  };
+
   const handleSubmitLink = () => {
     methods.setValue("linkUrl", methods.getValues("tempLinkUrl"), {
       shouldDirty: true,
     });
-    resetTempUrl();
-    closeModal();
+    handleCloseModal();
   };
 
   return (
@@ -43,7 +52,7 @@ export default function LinkModal({}) {
       <InputModal.Content className="h-[215px] w-[263px] rounded-xl sm:h-[224px] sm:w-[472px]">
         <div className="flex justify-between">
           <InputModal.Title>링크 업로드</InputModal.Title>
-          <InputModal.CloseButton />
+          <ExitBtn onClick={handleCloseModal} />
         </div>
         <div className="h-[80px] pt-6 pb-10">
           <InputModal.Label>링크</InputModal.Label>
