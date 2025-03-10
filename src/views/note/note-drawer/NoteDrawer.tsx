@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import ExitBtn from "@/components/atoms/exit-btn/ExitBtn";
 import BoundaryWrapper from "@/components/organisms/boundary-wrapper/BoundaryWrapper";
 
+import useBlockNavigation from "../../../hooks/note/useBlockNavigation";
 import NoteCreationForm from "../note-form/NoteCreationForm";
 import NoteUpdateForm from "../note-form/NoteUpdateForm";
 
@@ -39,6 +40,10 @@ export default function NoteDrawer() {
   const noteId = +(searchParams.get("noteId") ?? NaN);
   const isEditMode = searchParams.get("mode") === MODE.EDIT;
   const mode = getMode({ isEditMode, noteId, todoId });
+
+  useBlockNavigation({
+    isPreventCondition: mode !== null,
+  });
 
   const handleClick = () => {
     if (mode !== MODE.EDIT) {
