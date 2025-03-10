@@ -16,7 +16,7 @@ export default function LinkDisplay({ onClick }: LinkDisplayProps) {
   return (
     linkUrl && (
       <div
-        className="flex items-center justify-between gap-2 rounded-[20px] bg-slate-200 px-1.5 py-1 text-base font-normal"
+        className="flex cursor-pointer items-center justify-between gap-2 rounded-[20px] bg-slate-200 px-1.5 py-1 text-base font-normal hover:bg-slate-300"
         onClick={onClick}
       >
         <div className="flex items-center gap-2">
