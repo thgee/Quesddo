@@ -55,7 +55,7 @@ export default function Sidebar() {
         <aside
           className={cn(
             // mobile 스타일
-            "fixed inset-0 z-20 box-border flex h-screen w-full flex-[0_0_100%] flex-col overflow-hidden border-slate-200 bg-white pt-3 pb-8 transition-[flex,width] ease-[cubic-bezier(0,0.36,0,0.84)]",
+            "fixed inset-0 z-20 box-border flex h-dvh w-full flex-[0_0_100%] flex-col overflow-hidden border-slate-200 bg-white pt-3 pb-8 transition-[flex,width] ease-[cubic-bezier(0,0.36,0,0.84)]",
             // tablet + pc 스타일
             "sm:right-auto sm:w-[280px] sm:flex-[0_0_280px] sm:border-r sm:pb-9",
             !isOpen && "hidden sm:flex sm:w-[60px] sm:flex-[0_0_60px]",
