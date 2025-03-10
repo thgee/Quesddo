@@ -1,6 +1,5 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
 
 import ExitBtn from "@/components/atoms/exit-btn/ExitBtn";
 import BoundaryWrapper from "@/components/organisms/boundary-wrapper/BoundaryWrapper";
@@ -14,6 +13,24 @@ const MODE = {
   EDIT: "edit",
 } as const;
 
+const getMode = ({
+  isEditMode,
+  noteId,
+  todoId,
+}: {
+  isEditMode: boolean;
+  noteId: number;
+  todoId: number;
+}) => {
+  if (todoId >= 0) {
+    return MODE.CREATE;
+  } else if (noteId >= 0) {
+    return isEditMode ? MODE.EDIT : null;
+  } else {
+    return null;
+  }
+};
+
 export default function NoteDrawer() {
   const router = useRouter();
   const pathname = usePathname();
@@ -21,15 +38,7 @@ export default function NoteDrawer() {
   const todoId = +(searchParams.get("todoId") ?? NaN);
   const noteId = +(searchParams.get("noteId") ?? NaN);
   const isEditMode = searchParams.get("mode") === MODE.EDIT;
-  const mode = useMemo<(typeof MODE)[keyof typeof MODE] | null>(() => {
-    if (todoId >= 0) {
-      return MODE.CREATE;
-    } else if (noteId >= 0) {
-      return isEditMode ? MODE.EDIT : null;
-    } else {
-      return null;
-    }
-  }, [isEditMode, noteId, todoId]);
+  const mode = getMode({ isEditMode, noteId, todoId });
 
   const handleClick = () => {
     if (mode !== MODE.EDIT) {
