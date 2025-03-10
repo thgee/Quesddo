@@ -5,7 +5,6 @@ import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "@/components/molecules/error-fallback/ErrorFallback";
 import Toaster from "@/components/organisms/toaster/Toaster";
 import ToastProvider from "@/components/organisms/toaster/ToastProvider";
-import { InputModalProvider } from "@/contexts/InputModalContext";
 import { cn } from "@/utils/cn";
 import MenuDashboard from "@/views/layouts/sidebar/components/MenuDashBoard";
 import Profile from "@/views/layouts/sidebar/components/Profile";
