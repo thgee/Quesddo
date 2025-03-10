@@ -1,50 +1,78 @@
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type StopMovePageProps = {
-  isPreventCondition: boolean;
+  isPageMoveRestricted: boolean;
 };
 
 export default function useBlockNavigation({
-  isPreventCondition,
+  isPageMoveRestricted,
 }: StopMovePageProps) {
   const router = useRouter();
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [moveResolveFn, setMoveResolveFn] = useState<
+    ((choice: boolean) => void) | null
+  >(null);
 
-  // 내부 링크 이동
-  const handleRouteChange = useCallback(
-    async (url: string) => {
-      if (url === router.asPath) {
-        return;
-      }
-      if (
-        isPreventCondition &&
-        !confirm("정말 나가시겠어요? 작성된 내용이 모두 삭제됩니다.")
-      ) {
-        router.replace(router.asPath);
-      }
-      return;
-    },
-    [isPreventCondition],
-  );
+  const originalPush = router.push;
+
+  const handleConfirmPopup = () => {
+    if (moveResolveFn) {
+      setPopupOpen(false);
+      moveResolveFn(true);
+    }
+  };
+
+  const handleCanclePopup = () => {
+    if (moveResolveFn) {
+      setPopupOpen(false);
+      moveResolveFn(false);
+    }
+  };
+
+  const openModalAndWaitForChoice = () => {
+    return new Promise<boolean>((resolve) => {
+      setPopupOpen(true);
+      setMoveResolveFn(() => resolve);
+    });
+  };
+
+  // 뒤로 가기
+  const handleBeforePopState = ({ url }: { url: string }) => {
+    if (url === router.asPath) {
+      return true;
+    }
+    if (isPageMoveRestricted) {
+      openModalAndWaitForChoice().then((result) => {
+        if (!result) {
+          history.pushState(null, "", router.asPath);
+        } else {
+          originalPush(url);
+        }
+      });
+      return false; // 이동 차단
+    }
+    return true; // 이동 허용
+  };
 
   useEffect(() => {
-    router.events.on("routeChangeStart", handleRouteChange);
+    router.beforePopState(handleBeforePopState);
 
     return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
+      router.beforePopState(() => true);
     };
-  }, [router.events, handleRouteChange]);
+  }, [router]);
 
   // 외부 링크 이동
   const handleBeforeUnload = useCallback(
     (e: BeforeUnloadEvent) => {
       // 페이지를 벗어나지 않아야 하는 경우
-      if (isPreventCondition) {
+      if (isPageMoveRestricted) {
         e.preventDefault();
         e.returnValue = true; // legacy 브라우저를 위해 추가
       }
     },
-    [isPreventCondition],
+    [isPageMoveRestricted],
   );
 
   useEffect(() => {
@@ -55,5 +83,27 @@ export default function useBlockNavigation({
     };
   }, [handleBeforeUnload]);
 
-  return {};
+  // 내부 링크 이동
+  useEffect(() => {
+    const newPush: NextRouter["push"] = async (url, as, options) => {
+      // 페이지를 벗어나지 않아야 하는 경우
+      if (isPageMoveRestricted && !(await openModalAndWaitForChoice())) {
+        return false;
+      }
+
+      await originalPush(url, as, options);
+      return true;
+    };
+    router.push = newPush;
+
+    return () => {
+      router.push = originalPush;
+    };
+  }, [router, isPageMoveRestricted]);
+
+  return {
+    popupOpen,
+    handleCanclePopup,
+    handleConfirmPopup,
+  };
 }
