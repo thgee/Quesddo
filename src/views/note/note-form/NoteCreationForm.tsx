@@ -20,7 +20,7 @@ export default function NoteCreationForm({ todoId }: NoteCreationFormProps) {
       title: "",
       todoId,
       content: "",
-      linkUrl: "",
+      linkUrl: undefined,
     },
   });
   const mutation = useCreateNote();
