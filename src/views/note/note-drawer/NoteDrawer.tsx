@@ -42,7 +42,7 @@ export default function NoteDrawer() {
   const isEditMode = searchParams.get("mode") === MODE.EDIT;
   const mode = getMode({ isEditMode, noteId, todoId });
 
-  const { popupOpen, handleCanclePopup, handleConfirmPopup } =
+  const { isPopupOpen, handleCanclePopup, handleConfirmPopup } =
     useBlockNavigation({
       isPageMoveRestricted: mode !== null,
     });
@@ -70,7 +70,7 @@ export default function NoteDrawer() {
           </section>
         </div>
       )}
-      {popupOpen && (
+      {isPopupOpen && (
         <Popup
           onClose={handleCanclePopup}
           onConfirm={handleConfirmPopup}

@@ -1,5 +1,7 @@
 import { NextRouter, useRouter } from "next/router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+import { useModalContext } from "@/contexts/InputModalContext";
 
 type StopMovePageProps = {
   isPageMoveRestricted: boolean;
@@ -9,7 +11,7 @@ export default function useBlockNavigation({
   isPageMoveRestricted,
 }: StopMovePageProps) {
   const router = useRouter();
-  const [popupOpen, setPopupOpen] = useState(false);
+  const { isPopupOpen, showPopup, hidePopup } = useModalContext();
   const [moveResolveFn, setMoveResolveFn] = useState<
     ((choice: boolean) => void) | null
   >(null);
@@ -18,21 +20,21 @@ export default function useBlockNavigation({
 
   const handleConfirmPopup = () => {
     if (moveResolveFn) {
-      setPopupOpen(false);
+      hidePopup();
       moveResolveFn(true);
     }
   };
 
   const handleCanclePopup = () => {
     if (moveResolveFn) {
-      setPopupOpen(false);
+      hidePopup();
       moveResolveFn(false);
     }
   };
 
   const openModalAndWaitForChoice = () => {
     return new Promise<boolean>((resolve) => {
-      setPopupOpen(true);
+      showPopup();
       setMoveResolveFn(() => resolve);
     });
   };
@@ -102,7 +104,7 @@ export default function useBlockNavigation({
   }, [router, isPageMoveRestricted]);
 
   return {
-    popupOpen,
+    isPopupOpen,
     handleCanclePopup,
     handleConfirmPopup,
   };
