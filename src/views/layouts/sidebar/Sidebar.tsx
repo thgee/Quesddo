@@ -77,9 +77,7 @@ export default function Sidebar() {
                   <Profile />
                 </Suspense>
               </ErrorBoundary>
-              <InputModalProvider>
-                <MenuDashboard />
-              </InputModalProvider>
+              <MenuDashboard />
               <MenuGoal />
             </div>
             <Toaster className="bottom-[40px] w-auto px-4" />
