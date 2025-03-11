@@ -70,7 +70,7 @@ export default function InputDropdown({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="dropdown-scroll absolute z-50 mt-[1px] max-h-[180px] w-full overflow-hidden overflow-y-auto rounded-xl border border-slate-200 font-semibold shadow-lg sm:max-h-[132px]"
+            className="dropdown-scroll absolute z-50 mt-[1px] max-h-[calc(100vh-600px)] min-h-[130px] w-full overflow-hidden overflow-y-auto rounded-xl border border-slate-200 font-semibold shadow-lg sm:max-h-[calc(100vh-710px)]"
           >
             <ul>
               <InputDropdownItem
