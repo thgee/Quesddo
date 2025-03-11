@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import Main from "@/views/sign/Main";
 import SignForm from "@/views/sign/SignForm";
-import logo from "@public/img_logo.png";
+import logo from "@public/icons/logo-lg.png";
 
 export default function LoginPage() {
   return (

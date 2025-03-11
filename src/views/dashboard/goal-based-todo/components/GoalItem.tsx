@@ -76,7 +76,7 @@ export default function GoalItem({
           자세히 보기
         </span>
         <Image
-          src="/icons/ic_arrow_right.svg"
+          src="/icons/arrow-right.svg"
           alt={"arrow_right"}
           width={20}
           height={20}
