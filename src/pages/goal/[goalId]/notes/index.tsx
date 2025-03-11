@@ -1,6 +1,8 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 
 import { useInfiniteNotes } from "@/hooks/note/useInfiniteNotes";
+import QuesddoHead from "@/pages/_quesddo-head/QuesddoHead";
 import EmptyNotes from "@/views/notes/empty-notes/EmptyNotes";
 import Goal from "@/views/notes/goal/Goal";
 import NoteList from "@/views/notes/note-list/NoteList";
@@ -15,19 +17,25 @@ export default function NotesPage() {
   const hasNotes = notes && notes.length > 0;
 
   return (
-    <div className="min-h-screen bg-slate-100">
-      <div className="smd:pl-[360px] flex max-w-[792px] flex-col gap-4 p-4 sm:pl-[84px]">
-        <h1 className="text-lg font-semibold text-slate-900">노트 모아보기</h1>
+    <>
+      <QuesddoHead title="노트 모아보기" />
 
-        {hasNotes ? (
-          <>
-            <Goal goal={notes[0]?.goal?.title} />
-            <NoteList notes={notes} inViewRef={inViewRef} />
-          </>
-        ) : (
-          <EmptyNotes />
-        )}
+      <div className="min-h-screen bg-slate-100">
+        <div className="smd:pl-[360px] flex max-w-[792px] flex-col gap-4 p-4 sm:pl-[84px]">
+          <h1 className="text-lg font-semibold text-slate-900">
+            노트 모아보기
+          </h1>
+
+          {hasNotes ? (
+            <>
+              <Goal goal={notes[0]?.goal?.title} />
+              <NoteList notes={notes} inViewRef={inViewRef} />
+            </>
+          ) : (
+            <EmptyNotes />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
