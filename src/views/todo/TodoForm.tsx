@@ -48,8 +48,9 @@ export function TodoForm({
   handleTodoSubmit,
   onSubmit,
 }: TodoFormProps) {
-  const fetchGoalList = useInfiniteGoals({ size: 50, source: "todoForm" });
-  const goals = fetchGoalList.data?.goals || [];
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteGoals({ size: 10, source: "todoForm" });
+  const goals = data?.goals || [];
 
   const { register, handleSubmit, watch, control } = formMethods;
 
@@ -142,6 +143,9 @@ export function TodoForm({
                 control={control}
                 dropdownItems={goals}
                 buttonText={"목표를 선택해주세요"}
+                fetchNextPage={fetchNextPage}
+                hasNextPage={hasNextPage}
+                isFetchingNextPage={isFetchingNextPage}
               ></InputModal.DropdownInput>
             </div>
 
