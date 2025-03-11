@@ -10,7 +10,7 @@ import DeletePopup from "@/views/todo/popup/DeletePopup";
 import TodoCreateForm from "@/views/todo/todo-create-form/TodoCreateForm";
 import TodoUpdateForm from "@/views/todo/todo-update-form/TodoUpdateForm";
 
-import QuesddoHead from "../_quesddo-head/QuesddoHead";
+import QuesddoHead from "../../components/atoms/quesddo-head/QuesddoHead";
 
 export default function Dashboard() {
   const { modalType } = useModalContext();

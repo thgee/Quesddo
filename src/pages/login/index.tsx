@@ -5,7 +5,7 @@ import Main from "@/views/sign/Main";
 import SignForm from "@/views/sign/SignForm";
 import logo from "@public/icons/logo-lg.png";
 
-import QuesddoHead from "../_quesddo-head/QuesddoHead";
+import QuesddoHead from "../../components/atoms/quesddo-head/QuesddoHead";
 
 export default function LoginPage() {
   return (

@@ -4,13 +4,13 @@ import PlusIcon from "@/components/atoms/plus-icon/PlusIcon";
 import BoundaryWrapper from "@/components/organisms/boundary-wrapper/BoundaryWrapper";
 import { useModalContext } from "@/contexts/InputModalContext";
 import { useTodoListAction } from "@/hooks/useTodoListAction";
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils/cn/cn";
 import DeletePopup from "@/views/todo/popup/DeletePopup";
 import TodoCreateForm from "@/views/todo/todo-create-form/TodoCreateForm";
 import TodoUpdateForm from "@/views/todo/todo-update-form/TodoUpdateForm";
 import Todos from "@/views/todo/todoPage/Todos";
 
-import QuesddoHead from "../_quesddo-head/QuesddoHead";
+import QuesddoHead from "../../components/atoms/quesddo-head/QuesddoHead";
 
 export default function TodoPage() {
   const { modalType, openModal } = useModalContext();

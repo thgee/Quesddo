@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 
+import QuesddoHead from "@/components/atoms/quesddo-head/QuesddoHead";
 import { useInfiniteNotes } from "@/hooks/note/useInfiniteNotes";
-import QuesddoHead from "@/pages/_quesddo-head/QuesddoHead";
 import EmptyNotes from "@/views/notes/empty-notes/EmptyNotes";
 import Goal from "@/views/notes/goal/Goal";
 import NoteList from "@/views/notes/note-list/NoteList";

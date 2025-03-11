@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 
 import PageTitle from "@/components/atoms/page-title/PageTitle";
+import QuesddoHead from "@/components/atoms/quesddo-head/QuesddoHead";
 import { GoalDetailProvider } from "@/contexts/GoalDetailContext";
-import QuesddoHead from "@/pages/_quesddo-head/QuesddoHead";
 import GoalHeader from "@/views/goal/header/GoalHeader";
 import GoalNote from "@/views/goal/note/GoalNote";
 import GoalTodoContainer from "@/views/goal/todo/GoalTodoContainer";
