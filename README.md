@@ -2,10 +2,8 @@
 
 <img src = "https://github.com/user-attachments/assets/fd7f1f45-f09d-41b8-8131-e4c2311db407" />
 
-
 <br/>
 <br/>
-
 
 🌐 [배포 주소](https://quesddo.vercel.app)  
 🎨 [스토리북 바로가기](https://www.chromatic.com/library?appId=67acd5f79f2abb10c31d0c10&branch=main)
@@ -14,6 +12,8 @@
 <br />
 
 ## 목차
+
+
 
 [1](#1-기술-스택). 기술 스택  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1.1](#11-주요-스택-사용-이유). 주요 스택 사용 이유  
@@ -64,9 +64,7 @@
 
 #### **Next.js (Page Router)**
 
-- 서버에서 미리 가져올 데이터가 많지 않아 **App Router의 서버 컴포넌트 활용 이점이 크지 않다**고 판단하였습니다.
-- Page Router는 `use client` 선언이 필요 없어서 **클라이언트 컴포넌트 관리가 더 직관적**이라고 생각하여 채택하였습니다.
-- 여전히 많은 현업 프로젝트에서 Page Router를 사용하고 있으며, 앞으로도 활용될 가능성이 높아 적용하였습니다.
+- 여전히 많은 현업 프로젝트에서 Page Router를 사용하고 있으며, 앞으로도 사용할 일이 많을 것이라고 판단하여 채택하였습니다.
 
 #### **TanStack Query**
 
@@ -134,11 +132,11 @@ npm install --global yarn  // yarn 전역 설치 (필요 시)
 
 ## 4. 협업 방식
 
-<img height="16" width="16" src="https://cdn.simpleicons.org/jira" /> Jira: 새 기능 및 스프린트 단위 이슈관리  
+<img height="16" width="16" src="https://cdn.simpleicons.org/jira" /> Jira: 새 기능 및 스프린트 단위 이슈관리
 
-<img height="16" width="16" src="https://cdn.simpleicons.org/github/000/fff" /> GitHub: 지라 티켓과 연동, 팀원 간 코드 리뷰, Github Flow 적용, 디스코드 webhooks</div>  
+<img height="16" width="16" src="https://cdn.simpleicons.org/github/000/fff" /> GitHub: 지라 티켓과 연동, 팀원 간 코드 리뷰, Github Flow 적용, 디스코드 webhooks</div>
 
-<img height="16" width="16"  src="https://cdn.simpleicons.org/notion/000/fff" /> Notion: 데일리스크럼, 팀 회의, 멘토링, 회고 기록  
+<img height="16" width="16"  src="https://cdn.simpleicons.org/notion/000/fff" /> Notion: 데일리스크럼, 팀 회의, 멘토링, 회고 기록
 
 <br />
 
@@ -150,6 +148,8 @@ npm install --global yarn  // yarn 전역 설치 (필요 시)
 
  </br>
  </br>
+
+
 
 ## 5. 페이지별 기능
 
@@ -324,27 +324,28 @@ npm install --global yarn  // yarn 전역 설치 (필요 시)
 <br />
 <br />
 
+
+
 ## 6. 주요 도전 과제
 
 <details open>
 <summary> <h3>6.1. 브랜치전략</h3></summary>
 
-본 프로젝트는 **GitHub Flow**를 기반으로 하지만, 초기 개발 단계에서 **코드 충돌을 최소화하고 독립적인 개발 환경을 유지하기 위해** `develop` 브랜치를 추가해 운영했습니다.
+본 프로젝트는 **GitHub Flow**를 기반으로 하지만, 초기 개발 단계에서 **코드 충돌을 최소화**하고 **독립적인 개발 환경**을 유지하기 위해 **`develop`** 브랜치를 추가해 운영했습니다.
 
 <img src="https://github.com/user-attachments/assets/19e89815-394a-4d19-93f6-0834c5041014" width="400px"/>
 
 #### MVP 이전
 
-- **`main`**: 공통된 로직만 포함하며, 안정적인 배포 버전을 유지합니다.
-- **`feature`**: `main`에서 생성하여 개별 개발을 진행한 후 `develop`에 병합됩니다.
-- **`develop`**: 기능 개발이 병렬로 진행될 때 충돌을 방지하고, 통합된 테스트 환경을 제공하기 위해 사용되었습니다.
+- **`main`**: 공통적으로 사용되는 핵심 로직(라이브러리, 공통컴포넌트, 디자인 시스템) 을 모아둔 브랜치입니다.
+- **`feature`**: `main`에서 분기하여 개별 기능을 개발한 후, 완료되면 **`develop`** 에 병합하는 브랜치입니다.
+- **`develop`**: 새로운 기능이 추가된 feature 브랜치들이 병합되는 브랜치로, 배포를 위한 코드가 관리됩니다.
 
 #### MVP 이후: GitHub Flow 전환
 
-MVP 이후에는 유지보수 위주의 작업이 많아지면서, **빠른 개발과 배포를 위해 `develop` 브랜치를 제거**하고 **GitHub Flow** 방식으로 전환했습니다.
-
+- MVP 이후에는 유지보수 위주의 작업이 많아지면서, **빠른 개발과 배포**를 위해 **`develop`** 브랜치를 제거하고 **GitHub Flow** 방식으로 전환했습니다.
 - `main`에서 feature 브랜치를 생성해 **짧은 생명주기**로 개발하고, 검토 후 바로 `main`에 병합하는 방식입니다.
-- 이를 통해 **불필요한 중간 브랜치를 줄이고, 개발 속도를 높이며, 보다 유연한 협업**이 가능해졌습니다.
+- 이를 통해 불필요한 중간 브랜치를 줄이고, 개발 속도를 높이며, 보다 유연한 협업이 가능해졌습니다.
 
 <br />
 
@@ -361,21 +362,43 @@ MVP 이후에는 유지보수 위주의 작업이 많아지면서, **빠른 개�
 <details  open>
 <summary> <h3>6.2. 디자인패턴</h3></summary>
 
-다양한 컴포넌트를 효율적으로 관리하기 위해 **아토믹 디자인 패턴**을 채택했습니다.
-아토믹 디자인 패턴은 가장 작은 단위인 `atoms` 부터 기능이나 역할이 추가됨에 따라 `molecules`, `organisms`, `templates`, `pages`로 구성합니다.
+**아토믹 디자인 패턴** 과 **컴파운드 컴포넌트** 를 활용하여 일관된 디자인 시스템을 구축하고, 컴포넌트의 재사용성을 극대화 하였습니다.
 
-#### 아토믹 디자인 패턴을 적용한 폴더 구조
 
-- 공통 컴포넌트는 기능과 역할에 따라 atoms, molecules, organisms로 분류합니다.
-- 각 페이지에서만 필요한 컴포넌트는 각 도메인에 따라 views(templates 기능) 하위에 분류합니다.
-- 최종 결과물은 page router를 적용함에 따라 pages 하위에 위치합니다.
+<br/>
 
-#### 아토믹 디자인 패턴을 도입하면서 겪은 어려움과 해결방법
+#### 6.2.1. 아토믹 디자인 패턴
 
-- 공통 컴포넌트 분류하는 것에 어려움이 있었습니다. 어떤 기준으로 atoms, molecules, organisms를 분류할 것인지 모호했기 때문입니다.
-- 가장 작은 단위를 목표로 하다보니 UI의 기능만 하는 것을 atoms로 분류했습니다.
-- 기능이 많거나 중요한 역할을 하는 컴포넌트를 organisms로 분류했습니다.
-- 이후 필요에 따라 팀원들과 논의하면서 UI의 기능만을 하진 않지만 기능이 많지는 않은 컴포넌트를 molecules로 분류했습니다.
+  - 공통 컴포넌트의 효율적인 관리와 확장성을 고려하여 **아토믹 디자인 패턴**을 도입했습니다.  
+
+    ![Image](https://github.com/user-attachments/assets/44ad83b7-6b3e-4a71-90b3-5f088c0f4e27)
+
+<br/>
+
+   #### 아토믹 디자인 패턴 도입 과정에서의 어려움 
+
+   - 초기에는 Atoms, Molecules, Organisms의 분류 기준이 명확하지 않아, 팀원마다 해석이 달랐습니다.  
+   - 특히 "더 이상 쪼갤 수 있는가?" 를 기준으로 Atoms을 정의하다 보니, 아토믹 디자인의 계층 구조를 엄격히 지키지 못하고,  Atoms가 그대로 페이지에서 사용되는 경우도 발생했습니다.  
+
+<br/>
+
+   #### 해결 방법 및 개선 방향
+
+   - 기존의 "더 이상 쪼갤 수 있는가?" 대신, "상위 계층에서 조합되고 있는가?"* 를 기준으로 Atoms을 정의해야 한다고 판단했습니다.  
+   - Atoms는 반드시 Molecules나 Organisms에서 조합되어야 하며, 개별적으로 페이지에서 직접 사용되지 않도록 규칙을 명확히 설정했습니다.  
+   - 이를 통해 Atoms가 단독으로 사용되는 문제를 방지하고, 디자인 시스템의 계층 구조를 보다 체계적으로 유지할 수 있습니다.  
+   - 팀원마다 컴포넌트 분류 방식이 다를 수 있기 때문에, 아토믹 패턴을 사용할 때에는 **정기적인 회의**를 통해 기준을 맞추는 과정이 필수적이라고 실감했습니다.  
+
+<br/>
+
+#### 6.2.2. 컴파운드 컴포넌트 패턴
+
+  - 여러 개의 모달이 비슷한 디자인을 공유하지만 구조가 조금씩 다른 경우가 많았습니다.
+  - 기존 방식에서는 각 모달을 별도로 구현해야 했고, 이로 인해 **중복 코드**가 많아지고 **유지보수가 어려운** 문제가 발생했습니다.
+  - 이 문제를 해결하기 위해 **컴파운드 컴포넌트 패턴**을 적용하여 모달 내부 구조를 **유연하게 조합**할 수 있도록 개선했습니다.
+  - 모달을 구성하는 요소들을 개별 컴포넌트로 분리하고, 개발자가 필요에 따라 **원하는 방식으로 조합**할 수 있도록 설계하여 **재사용성을 극대화**했습니다.
+
+  ![Image](https://github.com/user-attachments/assets/6d99fc5f-2c79-4bf7-9ff6-662058b535d2)
 
 <br/>
 
@@ -392,12 +415,12 @@ MVP 이후에는 유지보수 위주의 작업이 많아지면서, **빠른 개�
 <details  open>
 <summary> <h3>6.3. Open API Generator</h3></summary>
  
-이번 프로젝트를 수행하면서 `Open API Generator`를 알게 되었습니다. 서버 요청에 필요한 type을 일일이 작성하지 않아도 된다는 장점이 있어 도입하게 되었습니다.
- 
- #### Open API Generator를 도입기 
- - 백엔드에서 API 파싱에 필요한 OAS 파일을 공개적으로 제공하지 않아, Swagger의 네트워크 탭에서 직접 추출하여 활용하였습니다. 
- - 백엔드에서 Schema로 지정하지 않은 type은 Open API Generator가 지정한 타입을 가지고 있는데, 해당 타입명이 난해한 부분이 있었습니다. 실제로 백엔드와 협력한다면, 이런 부분은 논의를 통해 해결할 수 있을 것이라 생각됩니다.
- - API 요청 함수까지 작성된 결과가 나왔지만, 기존에 custom한 axios instance와 tanstack-query를 사용하면서 타입만 가져오게 되었습니다.
+- 프로젝트를 진행하며 **Open API Generator**를 알게 되었고, 서버 요청에 필요한 타입을 자동으로 생성할 수 있다는 장점 때문에 도입하게 되었습니다.  
+- 기존에는 API가 변경될 때마다 **수동으로 타입을 수정해야 하는 불편함**이 있었지만, OAS를 활용하여 **타입을 자동으로 생성**하면서 유지보수 효율이 크게 향상되었습니다.  
+
+  **[자동 생성된 타입들]**  
+  ![image](https://github.com/user-attachments/assets/3616b780-2715-4ea3-88d4-4ab05e148e34)
+
 
  <br/>
 
@@ -414,16 +437,14 @@ MVP 이후에는 유지보수 위주의 작업이 많아지면서, **빠른 개�
 <details  open>
 <summary> <h3>6.4. 스토리북 & MSW</h3></summary>
 
-#### **Storybook**
+- **아토믹 디자인 패턴**을 적용하면서 개별 컴포넌트의 수가 많아졌고, 컴포넌트명만으로 식별하기 어려워져 한눈에 파악할 수 있는 환경이 필요했습니다.
 
-- **아토믹 디자인 패턴**을 적용하면서 개별 컴포넌트의 수가 많아졌고, 컴포넌트명만으로 식별하기 어려워져 **한눈에 파악할 수 있는 환경이 필요**했습니다.
-
-  <**Atoms 폴더** 내 컴포넌트가 많아지면서 관리가 어려워짐>  
+  [Atoms 폴더 내 컴포넌트가 많아지면서 관리가 어려워짐]  
   <img src="https://github.com/user-attachments/assets/48fc65ab-9152-4782-8b2b-1ae0dc3469dd"/>
 
-- Storybook을 활용하면 **컴포넌트를 시각적으로 관리하면서, UI 조립 전에 디자인과 기능을 미리 확인**할 수 있어 개발 생산성이 크게 향상될 것으로 판단하여 사용하였습니다.
-- Storybook 내에서 **API 통신이 필요한 경우가 있어 MSW를 함께 도입**하여 데이터 요청을 mocking 하였습니다.
-- **Chromatic을 활용해 Storybook을 배포**하고, PR마다 UI 변경 사항을 시각적으로 확인할 수 있도록 설정하였습니다.
+- Storybook을 활용하면 컴포넌트를 시각적으로 관리하면서, UI 조립 전에 디자인과 기능을 미리 확인할 수 있어 개발 생산성이 크게 향상될 것으로 판단하여 사용하였습니다.
+- Storybook 내에서 API 통신이 필요한 경우가 있어 **MSW**를 함께 도입하여 데이터 요청을 mocking 하였습니다.
+- **Chromatic**을 활용해 Storybook을 배포하고, PR마다 UI 변경 사항을 시각적으로 확인할 수 있도록 설정하였습니다.
 
    <img src="https://github.com/user-attachments/assets/7b4eae14-b80e-4d45-94c0-22d780e93385" width="700px"/>
 
@@ -442,7 +463,7 @@ MVP 이후에는 유지보수 위주의 작업이 많아지면서, **빠른 개�
 <details  open>
 <summary> <h3>6.5. 쿼리키 구조화</h3></summary>
 
-TanStack Query의 쿼리 키를 효율적으로 관리하기 위해 쿼리 키 팩토리 패턴을 적용하였습니다.
+TanStack Query의 쿼리 키를 효율적으로 관리하기 위해 **쿼리 키 팩토리 패턴**을 적용하였습니다.
 
 <br />
 
@@ -454,24 +475,14 @@ TanStack Query의 쿼리 키를 효율적으로 관리하기 위해 쿼리 키 �
 - 같은 엔티티를 나타내는 키라도 각 개발자가 다르게 정의하여 유지보수가 어려워짐.
 - 문자열 기반 키는 IDE의 자동 완성 기능을 활용할 수 없어 오타 발생 가능성 증가.
 
-이러한 문제를 해결하기 위해 **쿼리 키를 하나의 중앙 팩토리에서 생성**하도록 변경했습니다.  
-이를 통해 **재사용성을 높이고, 일관성을 유지하며, IDE 자동 완성을 활용할 수 있습니다.**
+이러한 문제를 해결하기 위해 쿼리 키를 하나의 중앙 팩토리에서 생성하도록 변경했습니다.  
+이를 통해 **재사용성**을 높이고, **일관성을 유지**하며, IDE **자동 완성**을 활용할 수 있습니다.
 
 <br />
 
-#### 쿼리키 구조
+**[쿼리키 구조]**
 
-| **쿼리키 그룹** | **설명**         | **쿼리키**                                                   | **사용 예시**                                                   |
-| --------------- | ---------------- | ------------------------------------------------------------ | --------------------------------------------------------------- |
-| **note**        | 노트 무한스크롤  | ["note", "infinite", {"goalId": goalId}]                     | queryKeys.note.infinite(goalId: 123).queryKey                   |
-|                 | 단일 노트        | ["note", "detail", {"noteId": noteId}]                       | queryKeys.note.detail(noteId: 123).queryKey                     |
-| **todo**        | 할 일 리스트     | ["todo", "list", {"goalId": goalId}, {"filter": filter}]     | queryKeys.todo.list({goalId: 123, filter: "done"}).queryKey     |
-|                 | 할 일 무한스크롤 | ["todo", "infinite", {"goalId": goalId}, {"filter": filter}] | queryKeys.todo.infinite({goalId: 123, filter: "done"}).queryKey |
-|                 | 노트 작성/수정   | ["todo", "editNote", {"todoId": todoId}]                     | queryKeys.todo.editNote(todoId: 123).queryKey                   |
-|                 | 할 일 진행률     | ["todo", "progress", {"goalId": goalId}]                     | queryKeys.todo.progress(goalId: 123).queryKey                   |
-| **goal**        | 목표 무한스크롤  | ["goal", "infinite", {"source": source}]                     | queryKeys.goal.infinite(source: "dashboard").queryKey           |
-|                 | 단일 목표        | ["goal", "detail", {"goalId": goalId}]                       | queryKeys.goal.detail(goalId: 123).queryKey                     |
-| **user**        | 유저 프로필 조회 | ["user", "profile"]                                          | queryKeys.user.profile.queryKey                                 |
+![image](https://github.com/user-attachments/assets/5d025633-3c5f-4c1b-ba12-e5419b71c8b3)
 
 <br />
 
@@ -493,7 +504,7 @@ GitHub Actions를 활용하여 개발 프로세스를 자동화하고, 코드 �
 ```bash
 workflows/
 ├── merge-main-to-dev.yml   # main → develop 자동 병합
-├── ci.yml                  # CI/CD 파이프라인
+├── ci.yml                  # CI 파이프라인 (빌드 및 테스트)
 ├── random-reviewer.yml     # 랜덤 리뷰어 지정
 ├── storybook.yml           # 스토리북 미리보기 자동화
 ├── vercel-deploy.yml       # Vercel 배포 자동화
@@ -539,6 +550,13 @@ workflows/
 
 <details  open>
 <summary> <h3>6.7. 테스트</h3></summary>
+
+- 유닛 테스트를 중점으로 공통컴포넌트 위주의 테스트코드를 작성하였습니다.
+- 테스트 커버리지 확인을 위한 Codecov 워크플로우를 구축하였습니다.
+
+<img src = "https://github.com/user-attachments/assets/5cf4de2e-b127-438b-bd6f-07268f4b5edf" width = "700px" />
+
+
 
 </details>
 
